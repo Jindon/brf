@@ -50,8 +50,8 @@
                                 <p class="mb-1 font-bold">Filter by fine</p>
                                 <x-select wire:model="filter.fine">
                                     <option value="all">All</option>
-                                    <option value="no">No</option>
-                                    <option value="yes">Yes</option>
+                                    <option value="no">No fine</option>
+                                    <option value="yes">Has fine</option>
                                 </x-select>
                             </div>
                         </div>
@@ -66,10 +66,10 @@
                                 <div class="md:col-span-3">
                                     <p class="relative"><span class="absolute block w-5 h-5 {{ $payment->due ? 'bg-red-500' : 'bg-green-500' }} rounded-full"></span> <span class="pl-5 mx-2 text-xl font-bold">{{ $payment->patron->name }}</span> Payments details for <span class="ml-3 font-bold">{{ $payment->month }}, {{ $payment->year }}</span></p>
                                     <div class="flex flex-wrap space-x-2">
-                                        <p>Due:<span class="text-red-500 font-bold ml-2">₹ {{ $payment->due }}</span></p>
-                                        <p>| Paid:<span class="text-green-500 font-bold ml-2">₹ {{ $payment->paid }}</span></p>
-                                        <p>| Fine:<span class="text-red-400 ml-2">₹ {{ $payment->fine }}</span></p>
-                                        <p>| Amount:<span class="ml-2">₹ {{ $payment->amount }}</span></p>
+                                        <p>D:<span class="text-red-500 font-bold ml-2">₹ {{ $payment->due }}</span></p>
+                                        <p>| P:<span class="text-green-500 font-bold ml-2">₹ {{ $payment->paid }}</span></p>
+                                        <p>| F:<span class="text-red-400 ml-2">₹ {{ $payment->fine }}</span></p>
+                                        <p>| A:<span class="ml-2">₹ {{ $payment->amount }}</span></p>
                                     </div>
                                 </div>
                                 <div>
@@ -90,7 +90,7 @@
                                     @endif
                                     @if(optional($selectedPayment)->id != $payment->id)
                                         <div>
-                                            <x-button :disabled="!$payment->due" wire:click.prevent="selectPayment({{ $payment->id }})">
+                                            <x-button :disabled="($payment->due == 0)" wire:click.prevent="selectPayment({{ $payment->id }})">
                                                 {{ $payment->due ? 'Make Payment' : 'Already Paid' }}
                                             </x-button>
                                         </div>

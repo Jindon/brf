@@ -16,8 +16,8 @@ class CreatePlansTable extends Migration
         Schema::create('plans', function (Blueprint $table) {
             $table->id();
             $table->uuid('uuid')->unique();
-            $table->integer('amount');
-            $table->integer('fine_amount');
+            $table->decimal('amount', 10, 2);
+            $table->decimal('fine_amount', 10, 2);
             $table->timestamps();
         });
     }

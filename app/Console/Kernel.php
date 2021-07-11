@@ -2,6 +2,7 @@
 
 namespace App\Console;
 
+use App\Jobs\GenerateFines;
 use App\Jobs\GeneratePayments;
 use Illuminate\Console\Scheduling\Schedule;
 use Illuminate\Foundation\Console\Kernel as ConsoleKernel;
@@ -28,6 +29,7 @@ class Kernel extends ConsoleKernel
         // $schedule->command('inspire')->hourly();
         $schedule->command('telescope:prune --hours=72')->daily();
         $schedule->job(new GeneratePayments(now()))->monthly();
+        $schedule->job(new GenerateFines(now()))->monthlyOn(16, '01:00');
     }
 
     /**

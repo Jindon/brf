@@ -230,4 +230,6 @@ return [
 
     ],
 
+    'compound_fine' => env('COMPOUND_FINES', true),
+
 ];
