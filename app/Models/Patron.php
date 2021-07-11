@@ -15,4 +15,25 @@ class Patron extends Model
     protected $casts = [
         'joined_on' => 'date'
     ];
+
+    public function payments()
+    {
+        return $this->hasMany(Payment::class);
+    }
+
+    public function getMonthPayment($month, $year)
+    {
+        return $this->payments()
+            ->where('month', $month)
+            ->where('year', $year)
+            ->first();
+    }
+
+    public function monthPaymentExists($month, $year)
+    {
+        return $this->payments()
+            ->where('month', $month)
+            ->where('year', $year)
+            ->count();
+    }
 }
