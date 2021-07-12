@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Livewire\Dashboard;
+use App\Http\Livewire\LoanManager;
 use App\Http\Livewire\PatronManager;
 use App\Http\Livewire\PaymentManager;
 use App\Http\Livewire\PlanManager;
@@ -15,6 +16,7 @@ Route::middleware(['auth'])->group(function () {
     Route::get('/patrons', PatronManager::class)->name('patrons');
     Route::get('/plans', PlanManager::class)->name('plans');
     Route::get('/payments', PaymentManager::class)->name('payments');
+    Route::get('/loans', LoanManager::class)->name('loans');
 });
 
 require __DIR__.'/auth.php';

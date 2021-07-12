@@ -231,5 +231,7 @@ return [
     ],
 
     'compound_fine' => env('COMPOUND_FINES', true),
+    'default_loan_fine' => env('LOAN_FINE', 50),
+    'default_loan_term' => env('LOAN_TERM', 10),
 
 ];
