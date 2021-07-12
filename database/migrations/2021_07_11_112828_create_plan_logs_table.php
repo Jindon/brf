@@ -15,10 +15,11 @@ class CreatePlanLogsTable extends Migration
     {
         Schema::create('plan_logs', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('plan_id')->constrained();
+            $table->foreignId('plan_id')->nullable()->constrained();
             $table->unsignedTinyInteger('month')->default(1);
             $table->year('year');
             $table->integer('payments_generated')->default(0);
+            $table->boolean('is_fine')->default(0);
             $table->timestamps();
         });
     }

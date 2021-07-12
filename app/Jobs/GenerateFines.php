@@ -3,6 +3,7 @@
 namespace App\Jobs;
 
 use App\Models\Payment;
+use App\Models\PlanLog;
 use Illuminate\Bus\Queueable;
 use Illuminate\Contracts\Queue\ShouldBeUnique;
 use Illuminate\Contracts\Queue\ShouldQueue;
@@ -39,13 +40,26 @@ class GenerateFines implements ShouldQueue
             ->where('due', '>', 0)
             ->get();
 
+        $count = 0;
+
         foreach ($pendingPayments as $pendingPayment) {
             if($this->day->gt($pendingPayment->due_date)) {
                 $pendingPayment->fine += $pendingPayment->plan->fine_amount;
                 $pendingPayment->total += $pendingPayment->plan->fine_amount;
                 $pendingPayment->due += $pendingPayment->plan->fine_amount;
                 $pendingPayment->save();
+                $count++;
             }
+        }
+
+        if($count) {
+            PlanLog::create([
+                'plan_id' => null,
+                'month' => $this->day->month,
+                'year' => $this->day->year,
+                'payments_generated' => $count,
+                'is_fine' => 1
+            ]);
         }
     }
 }

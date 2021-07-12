@@ -38,7 +38,11 @@
                     <ul class="pt-6">
                         @foreach($planLogs as $log)
                             <hr>
-                            <li class="py-3">🚀 <span class="ml-3 font-bold">{{ $log->payments_generated }}</span> Payments details generated for the month of <span class="font-bold">{{ $log->month }}, {{ $log->year }}</span> at {{ $log->created_at->format('d-m-Y, h:i a') }}.</li>
+                            @if($log->is_fine)
+                                <li class="py-3">🚩 <span class="ml-3 font-bold">{{ $log->payments_generated }}</span> Fines generated for the month of <span class="font-bold">{{ $log->month }}, {{ $log->year }}</span> at {{ $log->created_at->format('d-m-Y, h:i a') }}.</li>
+                            @else
+                                <li class="py-3">🚀 <span class="ml-3 font-bold">{{ $log->payments_generated }}</span> Payments details generated for the month of <span class="font-bold">{{ $log->month }}, {{ $log->year }}</span> at {{ $log->created_at->format('d-m-Y, h:i a') }}.</li>
+                            @endif
                         @endforeach
                     </ul>
                 </div>
