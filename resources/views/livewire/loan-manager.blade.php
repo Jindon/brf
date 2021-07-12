@@ -109,43 +109,11 @@
                                         </div>
                                     </div>
                                     <div class="w-1/3 flex flex-col justify-center items-end space-y-1">
-{{--                                        @if(optional($this->selectedPatron)->id != $patron->id)--}}
                                             <p>Current term: <span class="font-bold">{{ $loan->current_term }}</span></p>
                                             <p>Balance: <span class="font-bold text-red-500">₹{{ number_format($loan->due, 2, '.', ',') }}</span></p>
                                             <x-button wire:click.prevent="selectPatron({{ $loan }})">Payment details</x-button>
-{{--                                        @endif--}}
                                     </div>
                                 </div>
-        {{--                        @if(optional($this->selectedPatron)->id == $patron->id)--}}
-        {{--                            <div>--}}
-        {{--                                <form wire:submit.prevent="savePatron">--}}
-        {{--                                    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">--}}
-        {{--                                        <div>--}}
-        {{--                                            <x-label for="name" :value="__('Name')" />--}}
-        {{--                                            <x-input id="name" class="block mt-1 w-full" type="text" name="name" wire:model="form.name" required />--}}
-        {{--                                        </div>--}}
-        {{--                                        <div>--}}
-        {{--                                            <x-label for="email" :value="__('Email')" />--}}
-        {{--                                            <x-input id="email" class="block mt-1 w-full" type="email" name="email" wire:model="form.email" required />--}}
-        {{--                                        </div>--}}
-        {{--                                        <div>--}}
-        {{--                                            <x-label for="joined_on_{{ $patron->id }}" :value="__('Joined on')" />--}}
-        {{--                                            <x-pickaday id="joined_on_{{ $patron->id }}" wire:model="form.joined_on" required/>--}}
-        {{--                                        </div>--}}
-        {{--                                    </div>--}}
-
-        {{--                                    <div class="flex">--}}
-        {{--                                        <x-button class="mt-3 mr-3">--}}
-        {{--                                            {{ __('Save Patron') }}--}}
-        {{--                                        </x-button>--}}
-        {{--                                        <x-alt-button class="mt-3" type="button" wire:click.prevent="unSelectPatron">--}}
-        {{--                                            {{ __('Cancel') }}--}}
-        {{--                                        </x-alt-button>--}}
-        {{--                                    </div>--}}
-
-        {{--                                </form>--}}
-        {{--                            </div>--}}
-        {{--                        @endif--}}
                             </div>
                         </div>
                     @endforeach
