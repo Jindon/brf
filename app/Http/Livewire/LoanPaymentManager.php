@@ -2,13 +2,14 @@
 
 namespace App\Http\Livewire;
 
+use App\Models\LoanPayment;
 use App\Models\Patron;
 use App\Models\Payment;
 use Illuminate\Support\Carbon;
 use Livewire\Component;
 use Livewire\WithPagination;
 
-class PaymentManager extends Component
+class LoanPaymentManager extends Component
 {
     use WithPagination;
 
@@ -16,7 +17,7 @@ class PaymentManager extends Component
         'patronId' => null,
         'month' => null,
         'year' => null,
-        'status' => 'all',
+        'status' => 'unpaid',
         'fine' => 'all'
     ];
     public $months = [];
@@ -48,7 +49,7 @@ class PaymentManager extends Component
 
     public function selectPayment($paymentId)
     {
-        $this->selectedPayment = Payment::findOrFail($paymentId);
+        $this->selectedPayment = LoanPayment::findOrFail($paymentId);
         $this->amount = $this->selectedPayment->due;
     }
 
@@ -77,7 +78,7 @@ class PaymentManager extends Component
 
     public function paymentsQuery()
     {
-        return Payment::with(['plan', 'patron'])
+        return LoanPayment::with(['loan', 'patron'])
             ->when($this->filter['patronId'], function($query, $patronId) {
                 $query->where('patron_id', $patronId);
             })
@@ -103,13 +104,13 @@ class PaymentManager extends Component
                     $query->where('fine', '=', 0);
                 }
             })
-            ->latest();
+            ->oldest('due_date');
     }
 
     public function render()
     {
         $payments = $this->paymentsQuery()->paginate(15);
-        return view('livewire.payment-manager', [
+        return view('livewire.loan-payment-manager', [
             'payments' => $payments
         ]);
     }

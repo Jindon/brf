@@ -5,6 +5,7 @@ namespace App\Models;
 use App\Models\Traits\HasUuid;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Carbon;
 
 class LoanPayment extends Model
 {
@@ -23,5 +24,10 @@ class LoanPayment extends Model
     public function patron()
     {
         return $this->belongsTo(Patron::class);
+    }
+
+    public function getMonthAttribute($value)
+    {
+        return Carbon::create()->month($value)->format('M');
     }
 }

@@ -28,6 +28,7 @@ class CreateLoanPaymentsTable extends Migration
             $table->unsignedTinyInteger('month')->default(1);
             $table->year('year');
             $table->date('paid_on')->nullable();
+            $table->unsignedInteger('term');
             $table->timestamps();
         });
     }

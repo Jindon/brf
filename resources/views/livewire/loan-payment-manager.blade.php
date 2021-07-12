@@ -23,6 +23,7 @@
                             <div class="w-1/2">
                                 <p class="mb-1 font-bold">Filter by month</p>
                                 <x-select wire:model="filter.month">
+                                    <option value="">All months</option>
                                     @foreach($months as $month)
                                         <option value="{{ $month['value'] }}">{{ $month['label'] }}</option>
                                     @endforeach
@@ -31,6 +32,7 @@
                             <div class="w-1/2">
                                 <p class="mb-1 font-bold">Filter by year</p>
                                 <x-select wire:model="filter.year">
+                                    <option value="">All years</option>
                                     @foreach($years as $year)
                                         <option value="{{ $year }}">{{ $year }}</option>
                                     @endforeach
@@ -56,9 +58,11 @@
                             </div>
                         </div>
                     </div>
+
                     @if(!count($payments))
                         <p class="pt-6 text-gray-300">No payments details found...</p>
                     @endif
+
                     <div class="pt-6">
                         @foreach($payments as $payment)
                             <hr>
@@ -71,8 +75,16 @@
                                         <p>| F:<span class="text-red-400 ml-2">₹ {{ $payment->fine }}</span></p>
                                         <p>| A:<span class="ml-2">₹ {{ $payment->amount }}</span></p>
                                     </div>
+                                    <div class="flex flex-wrap space-x-2">
+                                        <p>I:<span class="text-red-500 font-bold ml-2">₹ {{ $payment->interest }}</span></p>
+                                        <p>| I%:<span class="text-green-500 font-bold ml-2">{{ $payment->loan->interest }}%</span></p>
+                                        <p>| LA:<span class="text-red-400 ml-2">₹ {{ $payment->loan->amount }}</span></p>
+                                        <p>| T:<span class="font-bold ml-2">{{ $payment->term }}</span></p>
+                                    </div>
                                 </div>
                                 <div>
+                                    <p class="text-xs text-gray-400">Borowed date</p>
+                                    <p>{{ $payment->loan->issued_on->format('m-d-Y') }}</p>
                                     <p class="text-xs text-gray-400">Last date</p>
                                     <p>{{ $payment->due_date->format('m-d-Y') }}</p>
                                 </div>

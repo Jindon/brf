@@ -4,8 +4,6 @@ namespace App\Jobs;
 
 use App\Models\Loan;
 use App\Models\LoanPayment;
-use App\Models\Payment;
-use App\Models\PlanLog;
 use Illuminate\Bus\Queueable;
 use Illuminate\Contracts\Queue\ShouldBeUnique;
 use Illuminate\Contracts\Queue\ShouldQueue;
@@ -34,8 +32,10 @@ class GenerateLoanPayments implements ShouldQueue
         $interest = round($this->loan->amount * ($this->loan->interest / 100), 2);
         $emi = ($this->loan->amount / $this->loan->terms);
 
+        $passedNoOfMonths = $this->loan->issued_on->diffInMonths(now());
+
         for($i = 0; $i < $this->loan->terms; $i++) {
-            if( $i > 0) {
+            if( $i > $passedNoOfMonths) {
                 $interest = 0;
             }
             $termDueDate = $this->loan->issued_on->addMonths($i + 1);
@@ -49,6 +49,7 @@ class GenerateLoanPayments implements ShouldQueue
                 'due_date' => $termDueDate,
                 'month' => $termDueDate->month,
                 'year' => $termDueDate->year,
+                'term' => $i + 1,
             ]);
         }
     }
