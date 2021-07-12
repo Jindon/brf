@@ -6,6 +6,8 @@ use App\Jobs\GenerateFines;
 use App\Jobs\GenerateLoanFine;
 use App\Jobs\GenerateLoanInterest;
 use App\Jobs\GeneratePayments;
+use App\Jobs\SendLoanPaymentReminderEmail;
+use App\Jobs\SendPaymentReminderEmail;
 use Illuminate\Console\Scheduling\Schedule;
 use Illuminate\Foundation\Console\Kernel as ConsoleKernel;
 
@@ -34,6 +36,8 @@ class Kernel extends ConsoleKernel
         $schedule->job(new GenerateFines(now()))->monthlyOn(16, '01:00');
         $schedule->job(new GenerateLoanInterest(now()))->dailyAt('00:10');
         $schedule->job(new GenerateLoanFine(now()))->dailyAt('00:20');
+        $schedule->job(new SendPaymentReminderEmail())->monthlyOn(14, '09:00');
+        $schedule->job(new SendLoanPaymentReminderEmail())->dailyAt('10:00');
     }
 
     /**
