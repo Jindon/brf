@@ -41,8 +41,7 @@
             <div class="mb-6">
                 <livewire:loan-report />
             </div>
-
-            <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
                 <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
                     <div class="p-6 bg-white">
                         <div class="">
@@ -61,7 +60,27 @@
                         </div>
                     </div>
                 </div>
+                <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
+                    <div class="p-6 bg-white">
+                        <div class="">
+                            <p class="text-lg font-bold">Patron pending contributions</p>
+                            <p class="text-sm text-gray-400 mb-3">as of {{ now()->format('M, Y') }}</p>
+                            <table class="table-fixed w-full text-left">
+                                <tbody>
+                                @foreach($patronsPendingContribution as $index => $patron)
+                                    <tr>
+                                        <th class="w-1/2 {{ $index%2 == 0 ? 'bg-gray-100' : '' }} border-b border-gray-200 px-3 py-2">{{ $patron->name }}</th>
+                                        <td class="w-1/2 {{ $index%2 == 0 ? 'bg-gray-100' : '' }} border-b border-gray-200 px-3 py-2">₹ {{ $patron->total_due }}</td>
+                                    </tr>
+                                @endforeach
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
 
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
                 <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
                     <div class="p-6 bg-white">
                         <div class="">
