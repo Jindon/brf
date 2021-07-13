@@ -33,6 +33,7 @@ class LoanManager extends Component
         $this->validate();
         $loan = Loan::create($this->form);
         GenerateLoanPayments::dispatch($loan);
+        $this->form['patron_id'] = null;
     }
 
     public function cancel()
@@ -40,10 +41,19 @@ class LoanManager extends Component
         $this->form['patron_id'] = null;
     }
 
+    public function delete(Loan $loan)
+    {
+        if(!$loan->paid) {
+            $loan->payments()->delete();
+            $loan->delete();
+        }
+    }
+
     public function mount()
     {
         $this->patrons = Patron::get(['id', 'name']);
         $this->form['issued_on'] = now()->format('d-m-Y');
+        $this->form['amount'] = config('app.default_loan_amount');
         $this->form['fine'] = config('app.default_loan_fine');
     }
 

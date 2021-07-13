@@ -84,9 +84,9 @@
                                 </div>
                                 <div>
                                     <p class="text-xs text-gray-400">Borowed date</p>
-                                    <p>{{ $payment->loan->issued_on->format('m-d-Y') }}</p>
+                                    <p>{{ $payment->loan->issued_on->format('d-m-Y') }}</p>
                                     <p class="text-xs text-gray-400">Last date</p>
-                                    <p>{{ $payment->due_date->format('m-d-Y') }}</p>
+                                    <p>{{ $payment->due_date->format('d-m-Y') }}</p>
                                 </div>
                                 <div class="md:col-span-3 flex md:justify-end">
                                     @if(optional($selectedPayment)->id == $payment->id)

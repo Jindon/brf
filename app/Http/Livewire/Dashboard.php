@@ -2,6 +2,8 @@
 
 namespace App\Http\Livewire;
 
+use App\Models\Loan;
+use App\Models\LoanPayment;
 use App\Models\Patron;
 use App\Models\Payment;
 use Illuminate\Support\Carbon;
@@ -16,7 +18,6 @@ class Dashboard extends Component
 
     public $months = [];
     public $years = [];
-    public $patrons = [];
 
     public function mount()
     {
@@ -33,10 +34,20 @@ class Dashboard extends Component
             ->get()->map(function($payment) {
                 return $payment->year;
             });
-        $this->patrons = Patron::get(['id', 'name']);
 
         $this->filter['month'] = now()->month;
         $this->filter['year'] = now()->year;
+    }
+
+    public function platformReport()
+    {
+        return [
+            'totalContribution' => (float) Payment::where('due', 0)->sum('total'),
+            'totalFine' => Payment::where('due', 0)->sum('fine') + LoanPayment::where('due', 0)->sum('fine'),
+            'totalLoanIssued' => (float) Loan::sum('amount'),
+            'pendingLoan' => Loan::sum('amount') - LoanPayment::where('due', 0)->sum('amount'),
+            'interestCollected' => (float) LoanPayment::where('due', '>', 0)->sum('interest')
+        ];
     }
 
     protected function paymentReportQuery($overall = false)
@@ -48,26 +59,28 @@ class Dashboard extends Component
             })
             ->when($this->filter['year'] && !$overall, function($query, $year) {
                 $query->where('year', $this->filter['year']);
-            });
+            })->first();
     }
 
-    public function patronsDueQuery()
+    public function patronsContributionQuery()
     {
         return Patron::query()
             ->join('payments', function($join) {
                 $join->on('patrons.id', 'payments.patron_id')
-                    ->where('payments.due', '>', 0);
+                    ->where('payments.due', 0);
             })
-            ->selectRaw("SUM(payments.due) as total_due, patrons.*")
-            ->groupBy("patrons.id");
+            ->selectRaw("SUM(payments.paid + payments.fine) as total_paid, patrons.*")
+            ->groupBy("patrons.id")
+            ->get();
     }
 
     public function render()
     {
         return view('livewire.dashboard', [
-            'paymentReport' => $this->paymentReportQuery()->first(),
-            'overallReport' => $this->paymentReportQuery(true)->first(),
-            'patronsWithDues' => $this->patronsDueQuery()->get()
+            'paymentReport' => $this->paymentReportQuery(),
+            'overallReport' => $this->paymentReportQuery(true),
+            'patronsContribution' => $this->patronsContributionQuery(),
+            'platformReport' => $this->platformReport()
         ]);
     }
 }
