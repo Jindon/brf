@@ -26,19 +26,19 @@
                                     @if($form['patron_id'])
                                         <div>
                                             <x-label for="amount" :value="__('Loan amount')" />
-                                            <x-input id="amount" class="block mt-1 w-full" type="number" name="amount" wire:model="form.amount" required />
+                                            <x-input id="amount" class="block mt-1 w-full" type="number" name="amount" wire:model.defer="form.amount" required />
                                         </div>
                                         <div>
                                             <x-label for="interest" :value="__('Interest pc')" />
-                                            <x-input id="interest" class="block mt-1 w-full" type="number" name="interest" wire:model="form.interest" max="100" min="1" required />
+                                            <x-input id="interest" class="block mt-1 w-full" type="number" name="interest" wire:model.defer="form.interest" max="100" min="1" required />
                                         </div>
                                         <div>
                                             <x-label for="fine" :value="__('Fine')" />
-                                            <x-input id="fine" class="block mt-1 w-full" type="number" name="fine" wire:model="form.fine" required />
+                                            <x-input id="fine" class="block mt-1 w-full" type="number" name="fine" wire:model.defer="form.fine" required />
                                         </div>
                                         <div>
                                             <x-label for="issued_on" :value="__('Issued on')" />
-                                            <x-pickaday id="issued_on" wire:model="form.issued_on" required/>
+                                            <x-pickaday id="issued_on" wire:model.defer="form.issued_on" required/>
                                         </div>
                                     @endif
                                 </div>

@@ -53,6 +53,7 @@ class LoanManager extends Component
     {
         $this->patrons = Patron::get(['id', 'name']);
         $this->form['issued_on'] = now()->format('d-m-Y');
+        $this->form['amount'] = config('app.default_loan_amount');
         $this->form['fine'] = config('app.default_loan_fine');
     }
 

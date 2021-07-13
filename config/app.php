@@ -232,6 +232,7 @@ return [
 
     'compound_fine' => env('COMPOUND_FINES', true),
     'default_loan_fine' => env('LOAN_FINE', 50),
+    'default_loan_amount' => env('DEFAULT_LOAN_AMOUNT', 10000),
     'default_loan_term' => env('LOAN_TERM', 10),
     'public_pin' => env('PUBLIC_PIN', 15012018),
 
