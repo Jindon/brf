@@ -45,6 +45,26 @@ class Patron extends Model
             ->where('due', '>', 0);
     }
 
+    public function getLoanPaidTotalAttribute()
+    {
+        return (float) $this->loanPayments()->where('due', 0)->sum('paid');
+    }
+
+    public function getLoanInterestPaidTotalAttribute()
+    {
+        return (float) $this->loanPayments()->where('due', 0)->sum('interest');
+    }
+
+    public function getLoanFinePaidTotalAttribute()
+    {
+        return (float) $this->loanPayments()->where('due', 0)->sum('fine');
+    }
+
+    public function getLoanTotalAttribute()
+    {
+        return (float) $this->loans()->sum('amount');
+    }
+
     public function getMonthPayment($month, $year)
     {
         return $this->payments()

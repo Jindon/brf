@@ -16,7 +16,6 @@ class Dashboard extends Component
 
     public $months = [];
     public $years = [];
-    public $patrons = [];
 
     public function mount()
     {
@@ -33,7 +32,6 @@ class Dashboard extends Component
             ->get()->map(function($payment) {
                 return $payment->year;
             });
-        $this->patrons = Patron::get(['id', 'name']);
 
         $this->filter['month'] = now()->month;
         $this->filter['year'] = now()->year;
