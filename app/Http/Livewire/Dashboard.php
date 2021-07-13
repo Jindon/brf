@@ -69,7 +69,7 @@ class Dashboard extends Component
     {
         return Patron::query()
             ->with('startingBalance')
-            ->join('payments', function($join) {
+            ->leftJoin('payments', function($join) {
                 $join->on('patrons.id', 'payments.patron_id')
                     ->where('payments.due', 0);
             })
