@@ -111,7 +111,8 @@
                                     <div class="w-1/3 flex flex-col justify-center items-end space-y-1">
                                             <p>Current term: <span class="font-bold">{{ $loan->current_term }}</span></p>
                                             <p>Balance: <span class="font-bold text-red-500">₹{{ number_format($loan->due, 2, '.', ',') }}</span></p>
-                                            <x-button wire:click.prevent="selectPatron({{ $loan }})">Payment details</x-button>
+                                            <p>Paid: <span class="font-bold text-red-500">₹{{ number_format($loan->paid, 2, '.', ',') }}</span></p>
+                                            <x-alt-button :disabled="$loan->paid != 0" wire:click.prevent="delete({{ $loan }})">Delete</x-alt-button>
                                     </div>
                                 </div>
                             </div>

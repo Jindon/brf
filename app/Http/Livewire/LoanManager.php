@@ -33,11 +33,20 @@ class LoanManager extends Component
         $this->validate();
         $loan = Loan::create($this->form);
         GenerateLoanPayments::dispatch($loan);
+        $this->form['patron_id'] = null;
     }
 
     public function cancel()
     {
         $this->form['patron_id'] = null;
+    }
+
+    public function delete(Loan $loan)
+    {
+        if(!$loan->paid) {
+            $loan->payments()->delete();
+            $loan->delete();
+        }
     }
 
     public function mount()

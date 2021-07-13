@@ -35,6 +35,11 @@ class Loan extends Model
         return $this->payments()->where('due', '>',0)->sum('due');
     }
 
+    public function getPaidAttribute()
+    {
+        return $this->payments()->where('due',0)->sum('paid');
+    }
+
     public function getCurrentTermAttribute()
     {
         $term = now()->diffInMonths($this->issued_on) + 1;
