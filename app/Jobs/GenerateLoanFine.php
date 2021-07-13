@@ -36,6 +36,10 @@ class GenerateLoanFine implements ShouldQueue
             ->where('due', '>', 0)
             ->get();
 
+        if(!$pendingPayments) {
+            return;
+        }
+
         foreach ($pendingPayments as $pendingPayment) {
 
             $pendingPayment->fine += $pendingPayment->loan->fine;

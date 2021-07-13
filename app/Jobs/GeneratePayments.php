@@ -37,6 +37,9 @@ class GeneratePayments implements ShouldQueue
      */
     public function handle()
     {
+        if(!$this->currentPlan) {
+            return;
+        }
         $patrons = Patron::get();
         $count = 0;
         foreach($patrons as $patron) {

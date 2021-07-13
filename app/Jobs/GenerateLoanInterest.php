@@ -36,6 +36,10 @@ class GenerateLoanInterest implements ShouldQueue
             ->where('due', '>', 0)
             ->get();
 
+        if(!$pendingPayments) {
+            return;
+        }
+
         foreach ($pendingPayments as $pendingPayment) {
             $interest = round($pendingPayment->loan->amount * ($pendingPayment->loan->interest / 100), 2);
 
