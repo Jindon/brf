@@ -38,6 +38,7 @@ class LoanPaymentManager extends Component
         $this->years = Payment::query()
             ->selectRaw("year")
             ->groupBy('year')
+            ->orderBy('year', 'desc')
             ->get()->map(function($payment) {
                 return $payment->year;
             });
