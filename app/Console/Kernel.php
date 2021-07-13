@@ -32,12 +32,14 @@ class Kernel extends ConsoleKernel
     {
         // $schedule->command('inspire')->hourly();
         $schedule->command('telescope:prune --hours=72')->daily();
-        $schedule->job(new GeneratePayments(now()))->monthly();
-        $schedule->job(new GenerateFines(now()))->monthlyOn(16, '01:00');
-        $schedule->job(new GenerateLoanInterest(now()))->dailyAt('00:10');
-        $schedule->job(new GenerateLoanFine(now()))->dailyAt('00:20');
-        $schedule->job(new SendPaymentReminderEmail())->monthlyOn(14, '09:00');
-        $schedule->job(new SendLoanPaymentReminderEmail())->dailyAt('10:00');
+        if(config('app.run_schedule')) {
+            $schedule->job(new GeneratePayments(now()))->monthly();
+            $schedule->job(new GenerateFines(now()))->monthlyOn(16, '01:00');
+            $schedule->job(new GenerateLoanInterest(now()))->dailyAt('00:10');
+            $schedule->job(new GenerateLoanFine(now()))->dailyAt('00:20');
+            $schedule->job(new SendPaymentReminderEmail())->monthlyOn(14, '09:00');
+            $schedule->job(new SendLoanPaymentReminderEmail())->dailyAt('10:00');
+        }
     }
 
     /**

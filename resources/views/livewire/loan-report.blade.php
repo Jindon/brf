@@ -19,12 +19,12 @@
                     <tbody>
                     @foreach($patronsWithDues as $index => $patron)
                         <tr>
-                            <th class="{{ $index/2 == 0 ? 'bg-gray-100' : '' }} border-b border-gray-200 px-3 py-2">{{ $patron->name }}</th>
-                            <td class="{{ $index/2 == 0 ? 'bg-gray-100' : '' }} border-b border-gray-200 px-3 py-2">₹{{ $patron->loan_total ?? 0 }}</td>
-                            <td class="{{ $index/2 == 0 ? 'bg-gray-100' : '' }} border-b border-gray-200 px-3 py-2">₹{{ $patron->total_due ?? 0 }}</td>
-                            <td class="{{ $index/2 == 0 ? 'bg-gray-100' : '' }} border-b border-gray-200 px-3 py-2">₹{{ $patron->loan_paid_total ?? 0 }}</td>
-                            <td class="{{ $index/2 == 0 ? 'bg-gray-100' : '' }} border-b border-gray-200 px-3 py-2">₹{{ $patron->loan_interest_paid_total ?? 0 }}</td>
-                            <td class="{{ $index/2 == 0 ? 'bg-gray-100' : '' }} border-b border-gray-200 px-3 py-2">₹{{ $patron->loan_fine_paid_total ?? 0 }}</td>
+                            <th class="{{ $index%2 == 0 ? 'bg-gray-100' : '' }} border-b border-gray-200 px-3 py-2">{{ $patron->name }}</th>
+                            <td class="{{ $index%2 == 0 ? 'bg-gray-100' : '' }} border-b border-gray-200 px-3 py-2">₹{{ $patron->loan_total ?? 0 }}</td>
+                            <td class="{{ $index%2 == 0 ? 'bg-gray-100' : '' }} border-b border-gray-200 px-3 py-2">₹{{ $patron->total_due ?? 0 }}</td>
+                            <td class="{{ $index%2 == 0 ? 'bg-gray-100' : '' }} border-b border-gray-200 px-3 py-2">₹{{ $patron->loan_paid_total ?? 0 }}</td>
+                            <td class="{{ $index%2 == 0 ? 'bg-gray-100' : '' }} border-b border-gray-200 px-3 py-2">₹{{ $patron->loan_interest_paid_total ?? 0 }}</td>
+                            <td class="{{ $index%2 == 0 ? 'bg-gray-100' : '' }} border-b border-gray-200 px-3 py-2">₹{{ $patron->loan_fine_paid_total ?? 0 }}</td>
                         </tr>
                     @endforeach
                     </tbody>

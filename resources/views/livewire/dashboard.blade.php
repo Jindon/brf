@@ -52,8 +52,8 @@
                                 <tbody>
                                 @foreach($patronsContribution as $index => $patron)
                                     <tr>
-                                        <th class="w-1/2 {{ $index/2 == 0 ? 'bg-gray-100' : '' }} border-b border-gray-200 px-3 py-2">{{ $patron->name }}</th>
-                                        <td class="w-1/2 {{ $index/2 == 0 ? 'bg-gray-100' : '' }} border-b border-gray-200 px-3 py-2">₹ {{ $patron->total_paid }}</td>
+                                        <th class="w-1/2 {{ $index%2 == 0 ? 'bg-gray-100' : '' }} border-b border-gray-200 px-3 py-2">{{ $patron->name }}</th>
+                                        <td class="w-1/2 {{ $index%2 == 0 ? 'bg-gray-100' : '' }} border-b border-gray-200 px-3 py-2">₹ {{ $patron->total_paid }}</td>
                                     </tr>
                                 @endforeach
                                 </tbody>
