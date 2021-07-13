@@ -6,6 +6,7 @@ use App\Http\Livewire\LoanPaymentManager;
 use App\Http\Livewire\PatronManager;
 use App\Http\Livewire\PaymentManager;
 use App\Http\Livewire\PlanManager;
+use App\Http\Livewire\PublicReport;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\HomeController;
 
@@ -20,5 +21,7 @@ Route::middleware(['auth'])->group(function () {
     Route::get('/loans', LoanManager::class)->name('loans');
     Route::get('/loans/payments', LoanPaymentManager::class)->name('loans.payments');
 });
+
+Route::get('/report', PublicReport::class)->name('public.report');
 
 require __DIR__.'/auth.php';
