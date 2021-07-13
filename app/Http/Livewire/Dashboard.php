@@ -83,12 +83,25 @@ class Dashboard extends Component
             });
     }
 
+    public function patronsPendingContributionQuery()
+    {
+        return Patron::query()
+            ->leftJoin('payments', function($join) {
+                $join->on('patrons.id', 'payments.patron_id')
+                    ->where('payments.due', '>', 0);
+            })
+            ->selectRaw("SUM(payments.due) as total_due, patrons.*")
+            ->groupBy("patrons.id")
+            ->get();
+    }
+
     public function render()
     {
         return view('livewire.dashboard', [
             'paymentReport' => $this->paymentReportQuery(),
             'overallReport' => $this->paymentReportQuery(true),
             'patronsContribution' => $this->patronsContributionQuery(),
+            'patronsPendingContribution' => $this->patronsPendingContributionQuery(),
             'platformReport' => $this->platformReport()
         ]);
     }
