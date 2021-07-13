@@ -40,6 +40,10 @@ class GenerateFines implements ShouldQueue
             ->where('due', '>', 0)
             ->get();
 
+        if(!$pendingPayments) {
+            return;
+        }
+
         $count = 0;
 
         foreach ($pendingPayments as $pendingPayment) {
