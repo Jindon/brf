@@ -3,6 +3,7 @@
 namespace App\Http\Livewire;
 
 use App\Models\Patron;
+use Illuminate\Support\Arr;
 use Livewire\Component;
 use Livewire\WithPagination;
 
@@ -11,9 +12,10 @@ class PatronManager extends Component
     use WithPagination;
 
     public $form = [
-      'name' => '',
-      'email' => '',
-      'joined_on' => ''
+        'name' => '',
+        'email' => '',
+        'joined_on' => '',
+        'starting_balance' => 0
     ];
     public $selectedPatron = null;
     public $addNew = false;
@@ -25,7 +27,8 @@ class PatronManager extends Component
         $this->form = [
             'name' => $patron->name,
             'email' => $patron->email,
-            'joined_on' => $patron->joined_on->format('d-m-Y')
+            'joined_on' => $patron->joined_on->format('d-m-Y'),
+            'starting_balance' => optional($patron->startingBalance)->amount ?? 0
         ];
     }
 
@@ -49,12 +52,22 @@ class PatronManager extends Component
 
     public function savePatron()
     {
-        if($this->selectedPatron) {
-            $this->selectedPatron->update($this->form);
+        if ($this->selectedPatron) {
+            $this->selectedPatron->update(Arr::except($this->form, 'starting_balance'));
+            $this->selectedPatron->startingBalance()->updateOrCreate([
+                'patron_id' => $this->selectedPatron->id
+            ],[
+                'amount' => $this->form['starting_balance']
+            ]);
             $this->unSelectPatron();
             return true;
         }
-        Patron::create($this->form);
+        $patron = Patron::create(Arr::except($this->form, 'starting_balance'));
+        $patron->startingBalance()->updateOrCreate([
+            'patron_id' => $patron->id
+        ],[
+            'amount' => $this->form['starting_balance']
+        ]);
         $this->clearForm();
         return true;
     }
@@ -64,6 +77,7 @@ class PatronManager extends Component
         $this->form['name'] = '';
         $this->form['email'] = '';
         $this->form['joined_on'] = '';
+        $this->form['starting_balance'] = 0;
     }
 
     public function render()

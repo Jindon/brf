@@ -236,4 +236,6 @@ return [
     'default_loan_term' => env('LOAN_TERM', 10),
     'public_pin' => env('PUBLIC_PIN', 15012018),
 
+    'starting_balance' => 60000
+
 ];

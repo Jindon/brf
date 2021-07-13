@@ -18,18 +18,22 @@
                         <p class="font-bold">Add a new patron</p>
                         <div>
                             <form wire:submit.prevent="savePatron">
-                                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+                                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
                                     <div>
                                         <x-label for="name" :value="__('Name')" />
-                                        <x-input id="name" class="block mt-1 w-full" type="text" name="name" wire:model="form.name" required />
+                                        <x-input id="name" class="block mt-1 w-full" type="text" name="name" wire:model.defer="form.name" required />
                                     </div>
                                     <div>
                                         <x-label for="email" :value="__('Email')" />
-                                        <x-input id="email" class="block mt-1 w-full" type="email" name="email" wire:model="form.email" required />
+                                        <x-input id="email" class="block mt-1 w-full" type="email" name="email" wire:model.defer="form.email" required />
                                     </div>
                                     <div>
                                         <x-label for="joined_on" :value="__('Joined on')" />
-                                        <x-pickaday id="joined_on" wire:model="form.joined_on" required/>
+                                        <x-pickaday id="joined_on" wire:model.defer="form.joined_on" required/>
+                                    </div>
+                                    <div>
+                                        <x-label for="starting_balance" :value="__('Starting balance')" />
+                                        <x-input id="starting_balance" class="block mt-1 w-full" type="number" name="starting_balance" wire:model.defer="form.starting_balance" required min="0"/>
                                     </div>
                                 </div>
 
@@ -70,18 +74,22 @@
                         @if(optional($this->selectedPatron)->id == $patron->id)
                             <div>
                                 <form wire:submit.prevent="savePatron">
-                                    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+                                    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
                                         <div>
                                             <x-label for="name" :value="__('Name')" />
-                                            <x-input id="name" class="block mt-1 w-full" type="text" name="name" wire:model="form.name" required />
+                                            <x-input id="name" class="block mt-1 w-full" type="text" name="name" wire:model.defer="form.name" required />
                                         </div>
                                         <div>
                                             <x-label for="email" :value="__('Email')" />
-                                            <x-input id="email" class="block mt-1 w-full" type="email" name="email" wire:model="form.email" required />
+                                            <x-input id="email" class="block mt-1 w-full" type="email" name="email" wire:model.defer="form.email" required />
                                         </div>
                                         <div>
                                             <x-label for="joined_on_{{ $patron->id }}" :value="__('Joined on')" />
-                                            <x-pickaday id="joined_on_{{ $patron->id }}" wire:model="form.joined_on" required/>
+                                            <x-pickaday id="joined_on_{{ $patron->id }}" wire:model.defer="form.joined_on" required/>
+                                        </div>
+                                        <div>
+                                            <x-label for="starting_balance_{{ $patron->id }}" :value="__('Starting balance')" />
+                                            <x-input id="starting_balance_{{ $patron->id }}" class="block mt-1 w-full" type="number" name="starting_balance" wire:model.defer="form.starting_balance" required min="0"/>
                                         </div>
                                     </div>
 
