@@ -16,6 +16,11 @@ class Patron extends Model
         'joined_on' => 'date'
     ];
 
+    public function startingBalance()
+    {
+        return $this->hasOne(StartingBalance::class);
+    }
+
     public function loans()
     {
         return $this->hasMany(Loan::class);

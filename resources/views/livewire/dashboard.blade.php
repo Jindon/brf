@@ -75,7 +75,7 @@
                                 </tr>
                                 <tr>
                                     <th class="w-1/2 border-b border-gray-200 px-3 py-2">Total Paid</th>
-                                    <td class="w-1/2 border-b border-gray-200 px-3 py-2">₹ {{ $overallReport->total_paid ?? 0 }}</td>
+                                    <td class="w-1/2 border-b border-gray-200 px-3 py-2">₹ {{ $overallReport->total_paid + $startingBalance ?? 0 }}</td>
                                 </tr>
                                 <tr>
                                     <th class="w-1/2 bg-gray-100 border-b border-gray-200 px-3 py-2">Total Fine</th>
@@ -83,7 +83,7 @@
                                 </tr>
                                 <tr>
                                     <th class="w-1/2 border-b border-gray-200 px-3 py-2">Total Amount</th>
-                                    <td class="w-1/2 border-b border-gray-200 px-3 py-2">₹ {{ $overallReport->total_amount ?? 0 }}</td>
+                                    <td class="w-1/2 border-b border-gray-200 px-3 py-2">₹ {{ $overallReport->total_amount + $startingBalance ?? 0 }}</td>
                                 </tr>
                                 </tbody>
                             </table>
