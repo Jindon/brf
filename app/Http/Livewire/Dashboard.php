@@ -72,7 +72,7 @@ class Dashboard extends Component
             ->with('startingBalance')
             ->leftJoin('payments', function($join) {
                 $join->on('patrons.id', 'payments.patron_id')
-                    ->where('payments.due', 0);
+                    ->where('payments.paid', '>', 0);
             })
             ->selectRaw("SUM(payments.paid) as total_paid, patrons.*")
             ->groupBy("patrons.id")

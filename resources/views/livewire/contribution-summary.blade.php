@@ -32,7 +32,7 @@
 
                             @foreach($months as $month)
                                 <td class="text-center {{ $index%2 == 0 ? 'bg-gray-100' : '' }} border-b border-gray-200 p-2 text-xs font-bold">
-                                    <p class="{{ data_get($patron['payment_details'], $month['label']) ? 'text-green-500' : 'text-gray-500' }}">
+                                    <p class="{{ data_get($patron['payment_details'], $month['label']) != 0 ? 'text-green-500' : 'text-gray-500' }}">
                                         ₹{{ data_get($patron['payment_details'], $month['label']) ?? 0 }}
                                     </p>
                                 </td>
