@@ -102,6 +102,10 @@
                     </div>
                 </div>
             </div>
+
+            <div class="mt-6">
+                <livewire:loan-report />
+            </div>
         </div>
     </div>
 </div>
