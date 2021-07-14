@@ -23,6 +23,7 @@
                             <div class="w-1/2">
                                 <p class="mb-1 font-bold">Filter by month</p>
                                 <x-select wire:model="filter.month">
+                                    <option value="">All months</option>
                                     @foreach($months as $month)
                                         <option value="{{ $month['value'] }}">{{ $month['label'] }}</option>
                                     @endforeach
@@ -31,6 +32,7 @@
                             <div class="w-1/2">
                                 <p class="mb-1 font-bold">Filter by year</p>
                                 <x-select wire:model="filter.year">
+                                    <option value="">All years</option>
                                     @foreach($years as $year)
                                         <option value="{{ $year }}">{{ $year }}</option>
                                     @endforeach

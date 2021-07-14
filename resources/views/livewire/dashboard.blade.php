@@ -118,6 +118,7 @@
                                 <div class="flex space-x-2 mb-3">
                                     <div class="w-1/2">
                                         <x-select wire:model="filter.month">
+                                            <option value="">All months</option>
                                             @foreach($months as $month)
                                                 <option value="{{ $month['value'] }}">{{ $month['label'] }}</option>
                                             @endforeach
