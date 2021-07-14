@@ -237,5 +237,10 @@ return [
     'public_pin' => env('PUBLIC_PIN', 15012018),
 
     'run_schedule' => env('RUN_SCHEDULE', TRUE),
+    'expense_type' => [
+        'maintenance' => ['type' => 'maintenance', 'label' => 'Maintenance'],
+        'meeting' => ['type' => 'meeting', 'label' => 'Patron Meeting'],
+        'other' => ['type' => 'other', 'label' => 'Other'],
+    ]
 
 ];

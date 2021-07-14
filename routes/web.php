@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Livewire\Dashboard;
+use App\Http\Livewire\ExpenseManager;
 use App\Http\Livewire\LoanManager;
 use App\Http\Livewire\LoanPaymentManager;
 use App\Http\Livewire\PatronManager;
@@ -20,6 +21,7 @@ Route::middleware(['auth'])->group(function () {
     Route::get('/payments', PaymentManager::class)->name('payments');
     Route::get('/loans', LoanManager::class)->name('loans');
     Route::get('/loans/payments', LoanPaymentManager::class)->name('loans.payments');
+    Route::get('/expenses', ExpenseManager::class)->name('expenses');
 });
 
 Route::get('/report', PublicReport::class)->name('public.report');

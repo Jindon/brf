@@ -24,6 +24,9 @@
                     <x-nav-link :href="route('loans.payments')" :active="request()->routeIs('loans.payments')">
                         {{ __('Loan Payments') }}
                     </x-nav-link>
+                    <x-nav-link :href="route('expenses')" :active="request()->routeIs('expenses')">
+                        {{ __('Expenses') }}
+                    </x-nav-link>
                     <x-nav-link :href="route('patrons')" :active="request()->routeIs('patrons')">
                         {{ __('Patrons') }}
                     </x-nav-link>
@@ -89,6 +92,9 @@
             </x-responsive-nav-link>
             <x-responsive-nav-link :href="route('loans.payments')" :active="request()->routeIs('loans.payments')">
                 {{ __('Loan Payments') }}
+            </x-responsive-nav-link>
+            <x-responsive-nav-link :href="route('expenses')" :active="request()->routeIs('expenses')">
+                {{ __('Expenses') }}
             </x-responsive-nav-link>
             <x-responsive-nav-link :href="route('patrons')" :active="request()->routeIs('patrons')">
                 {{ __('Patrons') }}

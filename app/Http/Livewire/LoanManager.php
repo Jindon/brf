@@ -48,6 +48,7 @@ class LoanManager extends Component
             $loan->payments()->delete();
             $loan->delete();
         }
+        $this->notify('Loan deleted successfully');
     }
 
     public function mount()

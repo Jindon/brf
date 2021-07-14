@@ -112,7 +112,7 @@
                                             <p>Current term: <span class="font-bold">{{ $loan->current_term }}</span></p>
                                             <p>Balance: <span class="font-bold text-red-500">₹{{ number_format($loan->due, 2, '.', ',') }}</span></p>
                                             <p>Paid: <span class="font-bold text-red-500">₹{{ number_format($loan->paid, 2, '.', ',') }}</span></p>
-                                            <x-alt-button :disabled="$loan->paid != 0" wire:click.prevent="delete({{ $loan }})">Delete</x-alt-button>
+                                            <x-alt-button id="delete_{{ $loan->id }}" :disabled="$loan->paid != 0" wire:click.prevent="delete({{ $loan }})">Delete</x-alt-button>
                                     </div>
                                 </div>
                             </div>
