@@ -2,6 +2,7 @@
 
 namespace App\Http\Livewire;
 
+use App\Models\Expense;
 use App\Models\Loan;
 use App\Models\LoanPayment;
 use App\Models\Patron;
@@ -45,12 +46,14 @@ class Dashboard extends Component
 
     public function platformReport()
     {
+        $totalExpense = Expense::where('paid', 1)->sum('amount');
         return [
             'totalContribution' => (float) Payment::where('due', 0)->sum('total') + $this->startingBalance,
             'totalFine' => Payment::where('due', 0)->sum('fine') + LoanPayment::where('due', 0)->sum('fine'),
             'totalLoanIssued' => (float) Loan::sum('amount'),
             'pendingLoan' => Loan::sum('amount') - LoanPayment::where('due', 0)->sum('amount'),
-            'interestCollected' => (float) LoanPayment::where('due', '>', 0)->sum('interest')
+            'interestCollected' => (float) LoanPayment::where('due', '>', 0)->sum('interest'),
+            'totalExpense' => $totalExpense
         ];
     }
 
