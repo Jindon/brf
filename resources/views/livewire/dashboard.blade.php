@@ -45,7 +45,7 @@
                 <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
                     <div class="p-6 bg-white">
                         <div class="">
-                            <p class="text-lg font-bold">Patron contribution summary</p>
+                            <p class="text-lg font-bold">Patrons contribution summary</p>
                             <p class="text-sm text-gray-400 mb-3">as of {{ now()->format('M, Y') }}</p>
                             <table class="table-fixed w-full text-left">
                                 <tbody>
@@ -63,7 +63,7 @@
                 <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
                     <div class="p-6 bg-white">
                         <div class="">
-                            <p class="text-lg font-bold">Patron pending contributions</p>
+                            <p class="text-lg font-bold">Patrons pending contributions</p>
                             <p class="text-sm text-gray-400 mb-3">as of {{ now()->format('M, Y') }}</p>
                             <table class="table-fixed w-full text-left">
                                 <tbody>
@@ -113,7 +113,7 @@
                 <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
                     <div class="p-6 bg-white">
                         <div class="">
-                            <p class="text-lg font-bold mb-3">Contribution  reports for</p>
+                            <p class="text-lg font-bold mb-3">Contribution reports for</p>
                             <div>
                                 <div class="flex space-x-2 mb-3">
                                     <div class="w-1/2">

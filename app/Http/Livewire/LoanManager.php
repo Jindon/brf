@@ -34,6 +34,7 @@ class LoanManager extends Component
         $loan = Loan::create($this->form);
         GenerateLoanPayments::dispatch($loan);
         $this->form['patron_id'] = null;
+        $this->notify('Loan issued successfully');
     }
 
     public function cancel()

@@ -2,7 +2,7 @@
     <div class="md:col-span-2 bg-white overflow-hidden shadow-sm sm:rounded-lg">
         <div class="p-6 bg-white">
             <div class="">
-                <p class="text-lg font-bold">Patron overall loan details</p>
+                <p class="text-lg font-bold">Patrons overall loan details</p>
                 <p class="text-sm text-gray-400 mb-3">as of {{ now()->format('M, Y') }}</p>
                 <div class="min-w-full overflow-x-scroll md:overflow-auto">
                     <table class="table-fixed min-w-full text-left">
