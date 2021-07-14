@@ -60,16 +60,17 @@ class PatronManager extends Component
                 'amount' => $this->form['starting_balance']
             ]);
             $this->unSelectPatron();
-            return true;
+        } else {
+            $patron = Patron::create(Arr::except($this->form, 'starting_balance'));
+            $patron->startingBalance()->updateOrCreate([
+                'patron_id' => $patron->id
+            ],[
+                'amount' => $this->form['starting_balance']
+            ]);
+            $this->clearForm();
         }
-        $patron = Patron::create(Arr::except($this->form, 'starting_balance'));
-        $patron->startingBalance()->updateOrCreate([
-            'patron_id' => $patron->id
-        ],[
-            'amount' => $this->form['starting_balance']
-        ]);
-        $this->clearForm();
-        return true;
+
+        $this->notify('Patron saved successfully');
     }
 
     public function clearForm()

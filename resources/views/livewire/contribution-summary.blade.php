@@ -3,7 +3,7 @@
         <div class="">
             <div class="flex flex-col md:flex-row md:justify-between md:items-center md:space-y-0 space-y-3 pb-3">
                 <div>
-                    <p class="text-lg font-bold">Patron contribution summary</p>
+                    <p class="text-lg font-bold">Patrons contribution summary</p>
                 </div>
                 <div class="md:w-1/4 w-full">
                     <x-select wire:model="filter.year">
@@ -20,7 +20,9 @@
                         <th class="p-2">Name</th>
                         @foreach($months as $month)
                             <th class="w-1/12 text-center text-xs">
-                                <div class="p-2 {{ now()->month == $month['value'] ? 'bg-green-300' : '' }}">{{ data_get($month, 'label') }}</div>
+                                <div class="p-2 {{ now()->month == $month['value'] && now()->year == $filter['year'] ? 'bg-green-300' : '' }}">
+                                    {{ data_get($month, 'label') }}
+                                </div>
                             </th>
                         @endforeach
                     </tr>

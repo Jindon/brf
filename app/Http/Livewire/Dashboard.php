@@ -78,7 +78,7 @@ class Dashboard extends Component
             ->groupBy("patrons.id")
             ->get()
             ->map(function($patron) {
-                $patron->total_paid = $patron->total_paid + optional($patron->startingBalance)->amount;
+                $patron->total_paid = (float) $patron->total_paid + optional($patron->startingBalance)->amount;
                 return $patron;
             });
     }

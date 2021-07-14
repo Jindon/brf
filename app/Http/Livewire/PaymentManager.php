@@ -74,6 +74,7 @@ class PaymentManager extends Component
         $this->selectedPayment->save();
 
         $this->cancel();
+        $this->notify('Payment made successfully');
     }
 
     public function paymentsQuery()
