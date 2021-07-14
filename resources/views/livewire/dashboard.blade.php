@@ -16,6 +16,8 @@
                                 <p class="text-lg md:text-xl font-bold">₹{{ $platformReport['totalContribution'] }}</p>
                                 <p class="text-gray-500 mt-2">Total fine</p>
                                 <p class="text-lg md:text-xl font-bold">₹{{ $platformReport['totalFine'] }}</p>
+                                <p class="text-gray-500 mt-2">Total expense</p>
+                                <p class="text-lg md:text-xl font-bold">₹{{ $platformReport['totalExpense'] }}</p>
                             </div>
                             <div>
                                 <p class="text-gray-500">Total loan issued</p>
@@ -27,7 +29,7 @@
                                 <p class="text-gray-500">Pending loan amount</p>
                                 <p class="text-lg md:text-xl font-bold text-red-500">₹{{ $platformReport['pendingLoan'] }}</p>
                                 <p class="text-gray-500 mt-2">Amount in account</p>
-                                <p class="text-lg md:text-xl font-bold">₹{{ $platformReport['totalContribution'] + $platformReport['interestCollected'] - $platformReport['pendingLoan'] }}</p>
+                                <p class="text-lg md:text-xl font-bold">₹{{ $platformReport['totalContribution'] + $platformReport['interestCollected'] - $platformReport['pendingLoan'] - $platformReport['totalExpense'] }}</p>
                             </div>
                         </div>
                     </div>

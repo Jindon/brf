@@ -26,7 +26,12 @@
                                     @if($form['patron_id'])
                                         <div>
                                             <x-label for="amount" :value="__('Loan amount')" />
-                                            <x-input id="amount" class="block mt-1 w-full" type="number" name="amount" wire:model.defer="form.amount" required />
+                                            <div class="flex items-center">
+                                                <x-input id="amount" class="block mt-1 w-full" type="number" name="amount" wire:model="form.amount" required />
+                                                <div class="w-1/2 p-2 ml-2">
+                                                    <p>/ ₹{{ $amountInAccount }}</p>
+                                                </div>
+                                            </div>
                                         </div>
                                         <div>
                                             <x-label for="interest" :value="__('Interest pc')" />
@@ -43,9 +48,13 @@
                                     @endif
                                 </div>
 
+                                @if($limitError)
+                                    <p class="p-2 my-3 rounded-sm bg-red-600 text-red-100 font-bold text-sm">{{ $limitError }}</p>
+                                @endif
+
                                 @if($form['patron_id'])
                                     <div class="flex">
-                                        <x-button class="mt-3 mr-3">
+                                        <x-button :diabled="$loading" class="mt-3 mr-3">
                                             {{ __('Issue Loan') }}
                                         </x-button>
                                         <x-alt-button class="mt-3" type="button" wire:click.prevent="cancel">
