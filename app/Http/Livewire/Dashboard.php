@@ -77,7 +77,7 @@ class Dashboard extends Component
                 $join->on('patrons.id', 'payments.patron_id')
                     ->where('payments.paid', '>', 0);
             })
-            ->selectRaw("SUM(payments.paid) as total_paid, patrons.*")
+            ->selectRaw("SUM(payments.paid) as total_paid, SUM(fine) as total_fine, patrons.*")
             ->groupBy("patrons.id")
             ->get()
             ->map(function($patron) {
@@ -93,7 +93,7 @@ class Dashboard extends Component
                 $join->on('patrons.id', 'payments.patron_id')
                     ->where('payments.due', '>', 0);
             })
-            ->selectRaw("SUM(payments.due) as total_due, patrons.*")
+            ->selectRaw("SUM(payments.due) as total_due, SUM(payments.fine) as total_fine, patrons.*")
             ->groupBy("patrons.id")
             ->get();
     }
