@@ -32,7 +32,10 @@ class ContributionSummary extends Component
             ->map(function($patron) {
                 $paymentDetails = [];
                 foreach ($patron->payments as $payment) {
-                    $paymentDetails[$payment->month] = $payment->paid;
+                    $paymentDetails[$payment->month] = [
+                        'paid' => $payment->paid,
+                        'due' => $payment->due,
+                    ];
                 }
                 $patron->payment_details = $paymentDetails;
                 return $patron->only('name', 'id', 'payment_details');

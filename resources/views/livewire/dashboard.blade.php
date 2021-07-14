@@ -54,7 +54,8 @@
                                 @foreach($patronsContribution as $index => $patron)
                                     <tr>
                                         <th class="w-1/2 {{ $index%2 == 0 ? 'bg-gray-100' : '' }} border-b border-gray-200 px-3 py-2">{{ $patron->name }}</th>
-                                        <td class="w-1/2 {{ $index%2 == 0 ? 'bg-gray-100' : '' }} border-b border-gray-200 px-3 py-2">₹ {{ $patron->total_paid }}</td>
+                                        <td class="w-1/2 {{ $index%2 == 0 ? 'bg-gray-100' : '' }} border-b border-gray-200 px-3 py-2">₹ {{ $patron->total_paid }}
+                                            <br class="md:hidden md:block"> <span class="md:ml-3 text-sm text-gray-500">(Fine: ₹ <b>{{ $patron->total_fine }}</b>)</span></td>
                                     </tr>
                                 @endforeach
                                 </tbody>
@@ -72,7 +73,9 @@
                                 @foreach($patronsPendingContribution as $index => $patron)
                                     <tr>
                                         <th class="w-1/2 {{ $index%2 == 0 ? 'bg-gray-100' : '' }} border-b border-gray-200 px-3 py-2">{{ $patron->name }}</th>
-                                        <td class="w-1/2 {{ $index%2 == 0 ? 'bg-gray-100' : '' }} border-b border-gray-200 px-3 py-2">₹ {{ $patron->total_due }}</td>
+                                        <td class="w-1/2 {{ $index%2 == 0 ? 'bg-gray-100' : '' }} border-b border-gray-200 px-3 py-2">₹ {{ $patron->total_due }}
+                                            <br class="md:hidden md:block"> <span class="md:ml-3 text-sm text-gray-500">(Fine: ₹ <b>{{ $patron->total_fine }}</b>)</span>
+                                        </td>
                                     </tr>
                                 @endforeach
                                 </tbody>
