@@ -52,7 +52,7 @@
                             <table class="table-fixed w-full text-left">
                                 <tbody>
                                 @foreach($patronsContribution as $index => $patron)
-                                    <tr>
+                                    <tr wire:key="row-{{ $patron->id }}">
                                         <th class="w-1/2 {{ $index%2 == 0 ? 'bg-gray-100' : '' }} border-b border-gray-200 px-3 py-2">{{ $patron->name }}</th>
                                         <td class="w-1/2 {{ $index%2 == 0 ? 'bg-gray-100' : '' }} border-b border-gray-200 px-3 py-2">₹ {{ $patron->total_paid }}</td>
                                     </tr>
@@ -70,7 +70,7 @@
                             <table class="table-fixed w-full text-left">
                                 <tbody>
                                 @foreach($patronsPendingContribution as $index => $patron)
-                                    <tr>
+                                    <tr wire:key="row-{{ $patron->id }}">
                                         <th class="w-1/2 {{ $index%2 == 0 ? 'bg-gray-100' : '' }} border-b border-gray-200 px-3 py-2">{{ $patron->name }}</th>
                                         <td class="w-1/2 {{ $index%2 == 0 ? 'bg-gray-100' : '' }} border-b border-gray-200 px-3 py-2">₹ {{ $patron->total_due }}
                                             <br class="md:hidden md:block"> <span class="md:ml-3 text-sm text-gray-500">(Fine: ₹ <b>{{ $patron->total_fine }}</b>)</span>
@@ -137,26 +137,26 @@
                                     </div>
                                 </div>
                             </div>
-                            <table class="table-fixed w-full text-left">
-                        <tbody>
-                            <tr>
-                                <th class="w-1/2 bg-gray-100 border-b border-gray-200 px-3 py-2">Total Due</th>
-                                <td class="w-1/2 bg-gray-100 border-b border-gray-200 px-3 py-2">₹ {{ $paymentReport->total_due ?? 0 }}</td>
-                            </tr>
-                            <tr>
-                                <th class="w-1/2 border-b border-gray-200 px-3 py-2">Total Paid</th>
-                                <td class="w-1/2 border-b border-gray-200 px-3 py-2">₹ {{ $paymentReport->total_paid ?? 0 }}</td>
-                            </tr>
-                            <tr>
-                                <th class="w-1/2 bg-gray-100 border-b border-gray-200 px-3 py-2">Total Fine</th>
-                                <td class="w-1/2 bg-gray-100 border-b border-gray-200 px-3 py-2">₹ {{ $paymentReport->total_fine ?? 0 }}</td>
-                            </tr>
-                            <tr>
-                                <th class="w-1/2 border-b border-gray-200 px-3 py-2">Total Amount</th>
-                                <td class="w-1/2 border-b border-gray-200 px-3 py-2">₹ {{ $paymentReport->total_amount ?? 0 }}</td>
-                            </tr>
+                            <table class="table-fixed w-full text-left" wire:loading.class.delay="opacity-50">
+                                <tbody>
+                                    <tr>
+                                        <th class="w-1/2 bg-gray-100 border-b border-gray-200 px-3 py-2">Total Due</th>
+                                        <td class="w-1/2 bg-gray-100 border-b border-gray-200 px-3 py-2">₹ {{ $paymentReport->total_due ?? 0 }}</td>
+                                    </tr>
+                                    <tr>
+                                        <th class="w-1/2 border-b border-gray-200 px-3 py-2">Total Paid</th>
+                                        <td class="w-1/2 border-b border-gray-200 px-3 py-2">₹ {{ $paymentReport->total_paid ?? 0 }}</td>
+                                    </tr>
+                                    <tr>
+                                        <th class="w-1/2 bg-gray-100 border-b border-gray-200 px-3 py-2">Total Fine</th>
+                                        <td class="w-1/2 bg-gray-100 border-b border-gray-200 px-3 py-2">₹ {{ $paymentReport->total_fine ?? 0 }}</td>
+                                    </tr>
+                                    <tr>
+                                        <th class="w-1/2 border-b border-gray-200 px-3 py-2">Total Amount</th>
+                                        <td class="w-1/2 border-b border-gray-200 px-3 py-2">₹ {{ $paymentReport->total_amount ?? 0 }}</td>
+                                    </tr>
                         </tbody>
-                    </table>
+                            </table>
                         </div>
                     </div>
                 </div>
