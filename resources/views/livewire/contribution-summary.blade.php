@@ -33,7 +33,10 @@
                             <th class="{{ $index%2 == 0 ? 'bg-gray-100' : '' }} border-b border-gray-200 p-2 text-sm">{{ $patron['name'] }}</th>
 
                             @foreach($months as $month)
-                                <td class="text-center {{ $index%2 == 0 ? 'bg-gray-100' : '' }} border-b border-gray-200 p-2 text-xs font-bold">
+                                <td
+                                    class="text-center {{ $index%2 == 0 ? 'bg-gray-100' : '' }} border-b border-gray-200 p-2 text-xs font-bold"
+                                    wire:loading.class.delay="opacity-50" wire:key="patron-row-{{ $patron['id'] }}-{{ $month['label'] }}"
+                                >
                                     <p class="{{
                                             data_get(data_get($patron['payment_details'], $month['label']), 'due') == 0 && data_get(data_get($patron['payment_details'], $month['label']), 'paid') != 0
                                             ? 'text-green-500' : 'text-gray-500'

@@ -58,13 +58,15 @@
                             </div>
                         </div>
                     </div>
-                    @if(!count($payments))
+                    @if(!$payments->total())
                         <p class="pt-6 text-gray-300">No payments details found...</p>
                     @endif
                     <div class="pt-6">
                         @foreach($payments as $payment)
-                            <hr>
-                            <div class="grid grid-col-1 gap-3 md:grid-cols-7 py-3">
+                            <div
+                                class="grid grid-col-1 gap-3 md:grid-cols-7 py-3"
+                                wire:loading.class.delay="opacity-50" wire:key="row-{{ $payment->id }}"
+                            >
                                 <div class="md:col-span-3">
                                     <p class="relative"><span class="absolute block w-5 h-5 {{ $payment->due > 0 ? 'bg-red-500' : 'bg-green-500' }} rounded-full"></span> <span class="pl-5 mx-2 text-xl font-bold">{{ $payment->patron->name }}</span> Payments details for <span class="ml-3 font-bold">{{ $payment->month }}, {{ $payment->year }}</span></p>
                                     <div class="flex flex-wrap space-x-2">

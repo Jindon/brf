@@ -7,17 +7,20 @@
 
     <div class="py-12">
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
-            <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
+            <div
+                class="bg-white overflow-hidden shadow-sm sm:rounded-lg"
+                wire:loading.class.delay="opacity-50"
+            >
                 <div class="p-6 bg-white border-b border-gray-200">
                     <p class="text-xl text-gray-500 mb-2">Current active plan</p>
                     <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
                         <div>
                             <p class="font-bold">Plan amount</p>
-                            <x-input id="amount" class="block w-full" type="number" name="amount" wire:model="amount" required />
+                            <x-input id="amount" class="block w-full" type="number" name="amount" wire:model.defer="amount" required />
                         </div>
                         <div>
                             <p class="font-bold">Fine amount</p>
-                            <x-input id="fine_amount" class="block w-full" type="number" name="fine_amount" wire:model="fine_amount" required />
+                            <x-input id="fine_amount" class="block w-full" type="number" name="fine_amount" wire:model.defer="fine_amount" required />
                         </div>
                         <div>
                             <x-button class="md:mt-7" wire:click.prevent="updateAmount">

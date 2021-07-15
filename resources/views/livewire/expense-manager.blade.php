@@ -66,7 +66,7 @@
                         </div>
                     </div>
 
-                    @if(!$expenses->count())
+                    @if(!$expenses->total())
                         <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg mt-3">
                             <div class="px-6 py-3 bg-white">
                                 <p class="text-gray-300 py-6">No expenses found....</p>
@@ -74,7 +74,10 @@
                         </div>
                     @endif
                     @foreach($expenses as $expense)
-                        <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg mt-3">
+                        <div
+                            class="bg-white overflow-hidden shadow-sm sm:rounded-lg mt-3"
+                            wire:loading.class.delay="opacity-50" wire:key="row-{{ $expense->id }}"
+                        >
                             <div class="px-6 py-3 bg-white">
                                 <div class="flex justify-between items-center">
                                     <div class="w-2/3 flex md:flex-row flex-col md:justify-between md:items-center">
